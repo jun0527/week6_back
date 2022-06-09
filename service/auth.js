@@ -19,7 +19,7 @@ const isAuth = async (req, res, next) => {
   const decoded = await new Promise((resolve, reject) => {
     jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
       if (err) {
-        reject(err);
+        return appError(400, 'token錯誤', next);
       } else {
         resolve(payload);
       }
